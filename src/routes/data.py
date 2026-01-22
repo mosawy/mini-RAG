@@ -31,8 +31,8 @@ async def upload_data(
                 "segnal":resalt_segnal
             }
         )
-    
-    file_path = data_controller.generate_unique_filename(
+
+    file_path , file_id = data_controller.generate_unique_filepath(
         orginal_filename=file.filename,
         project_id=project_id
     )
@@ -54,7 +54,8 @@ async def upload_data(
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={
-            "segnal":ResponceSegnal.FILE_UPLOADED_SUCCESSFULLY.value
+            "segnal":ResponceSegnal.FILE_UPLOADED_SUCCESSFULLY.value,
+            "file_id":file_id
         }
     )
 
