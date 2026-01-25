@@ -9,3 +9,4 @@ langchain-community>=0.0.38
 pyMupdf==1.24.3
 pymongo==4.6.1
 motor==3.4.0
+openai==1.35.13
