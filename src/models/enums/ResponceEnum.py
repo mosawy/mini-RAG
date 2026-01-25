@@ -10,3 +10,6 @@ class ResponceSegnal(Enum):
     
     PROCESSING_FAILED = "File processing failed."
     PROCESSING_SUCCESS = "File processed successfully."
+
+    NO_FILES_ERROR = "No files found."
+    FILE_ID_ERROR = "File ID error."
