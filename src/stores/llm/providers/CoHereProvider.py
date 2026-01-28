@@ -23,6 +23,7 @@ class CoHereProvider(LLMInterface):
 
         self.client = cohere.Client(api_key=self.api_key)
         
+        self.enums = CohereEnums
         self.logger = logging.getLogger(__name__)
 
     def set_generation_model(self,model_id:str):
@@ -44,13 +45,13 @@ class CoHereProvider(LLMInterface):
             self.logger.error("Generation model is not set.")
             return None
 
-        temperature=temperature if temperature is not None else self.default_generation_temperature,
-        max_tokens=max_output_tokens if max_output_tokens is not None else self.default_generation_max_output
+        temperature = temperature if temperature is not None else self.default_generation_temperature
+        max_tokens = max_output_tokens if max_output_tokens is not None else self.default_generation_max_output_tokens
 
         response = self.client.chat(
             model=self.generation_model_id,
             chat_history=chat_history ,
-            messages=self.process_text(prompt),
+            message=self.process_text(prompt),
             temperature=temperature,
             max_tokens=max_tokens
         )

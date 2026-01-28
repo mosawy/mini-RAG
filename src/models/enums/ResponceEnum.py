@@ -20,3 +20,5 @@ class ResponceSegnal(Enum):
     VECTOR_DB_COLLECTION_RETRIEVED_SUCCESS = "Vector database collection information retrieved successfully."
     VECTOR_SEARCH_SUCCESS = "Vector database search completed successfully."
     VECTOR_SEARCH_FAILED = "Vector database search failed."
+    RAG_ANSWER_FAILED = "RAG answer generation failed."
+    RAG_ANSWER_SUCCESS = "RAG answer generated successfully."

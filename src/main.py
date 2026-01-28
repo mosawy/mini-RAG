@@ -5,7 +5,7 @@ from helpers.config import get_settings
 from stores.llm.LLMProviderFactory import LLMProviderFactory
 from contextlib import asynccontextmanager
 from stores.vectordb.VectorDBProviderFactory import VectorDBProviderFactory
-
+from stores.llm.templetes.templete_parser import TempleteParser
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
@@ -28,6 +28,11 @@ async def lifespan(app: FastAPI):
     # Initialize Vector DB
     app.vectordb_client = vectordb_provider_factory.create(provider=settings.VECTOR_DB_BACKEND)
     app.vectordb_client.connect()
+
+    app.template_parser = TempleteParser(
+        language=settings.PRIMARY_LANGUAGE ,
+        default_language=settings.DEFAULT_LANGUAGE
+        )
     
     yield
     
