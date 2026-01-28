@@ -81,7 +81,7 @@ class CoHereProvider(LLMInterface):
             input_type=input_type,
             embedding_types=['float']
         )
-        if not response or not response.embeddings or len(response.embeddings) == 0 or not response.embeddings.float:
+        if not response or not response.embeddings or not response.embeddings.float or len(response.embeddings.float) == 0:
             self.logger.error("No embeddings returned from Cohere API.")
             return None
 

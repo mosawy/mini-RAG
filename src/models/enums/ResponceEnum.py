@@ -13,3 +13,10 @@ class ResponceSegnal(Enum):
 
     NO_FILES_ERROR = "No files found."
     FILE_ID_ERROR = "File ID error."
+
+    PROJECT_NOT_FOUND = "Project not found."
+    INSERT_INTO_VECTOR_DB_FAILED = "Failed to insert data into vector database."
+    INSERT_INTO_VECTOR_DB_SUCCESS = "Data inserted into vector database successfully."
+    VECTOR_DB_COLLECTION_RETRIEVED_SUCCESS = "Vector database collection information retrieved successfully."
+    VECTOR_SEARCH_SUCCESS = "Vector database search completed successfully."
+    VECTOR_SEARCH_FAILED = "Vector database search failed."

@@ -51,7 +51,7 @@ class VectorDBInterface(ABC):
         pass
 
     @abstractmethod
-    def serch_by_vector(self, collection_name:str,
+    def search_by_vector(self, collection_name:str,
                         vector: list,
                         limit: int ):
         pass

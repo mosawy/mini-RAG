@@ -3,7 +3,8 @@ from ..VectorDBInterface import VectorDBInterface
 import logging
 from ..VectorDBEnums import VectorDBEnums, DistanceMethodEnums
 from typing import List
-class QdrantDB(VectorDBInterface):
+
+class QdrantDBProvider(VectorDBInterface):
 
     def __init__(self,db_path:str,distance_method:str):
         self.logger = logging.getLogger(__name__)
@@ -71,6 +72,7 @@ class QdrantDB(VectorDBInterface):
                 records=[
                     models.Record(
                         vector=vector,
+                        id=[record_id],
                         payload={
                             "text": text,
                             "metadata": metadata
@@ -88,22 +90,24 @@ class QdrantDB(VectorDBInterface):
                      metadatas: list = None,
                      record_ids: list = None,
                      batch_size: int = 50):
+        
         if metadatas is None:
             metadatas = [None] * len(texts)
         
         if record_ids is None:
-            record_ids = [None] * len(texts)
+            record_ids = list(0,range(len(texts)))
         
         for i in range(0, len(texts), batch_size):
             batch_end = i + batch_size
             batch_texts = texts[i:batch_end]
             batch_vectors = vectors[i:batch_end]
             batch_metadatas = metadatas[i:batch_end]
-            batch_record_ids = record_ids[i:batch_end]
+            batch_record_ids = record_ids[i:batch_end]  
 
             batch_records = [
                 models.Record(
                         vector=batch_vectors[x],
+                        id=batch_record_ids[x],
                         payload={
                             "text": batch_texts[x],
                             "metadata": batch_metadatas[x]
@@ -120,7 +124,7 @@ class QdrantDB(VectorDBInterface):
                 self.logger.error(f"Error inserting batch starting at index {i}: {e}")
                 return False
         return True
-    def serch_by_vector(self, collection_name:str,
+    def search_by_vector(self, collection_name:str,
                         vector: list,
                         limit: int = 5 ):
         return self.client.search(
