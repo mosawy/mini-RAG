@@ -75,15 +75,15 @@ class NLPController(BaseController):
             self.logger.error("Failed to get embedding for the search text.")
             return False
         # search in vector db
-        result = self.vectordb_client.search_by_vector(
+        results = self.vectordb_client.search_by_vector(
             collection_name=collection_name,
             vector=vector,
             limit=limit
         )
-        if not result:
+        if not results:
             self.logger.error("No results found in vector database search.")
             return False
-        return json.loads(json.dumps(result,default=lambda x:x.__dict__))
+        return results
 
 
         
